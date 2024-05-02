@@ -1,0 +1,59 @@
+\usepackage[english]{babel}
+\usepackage[a4paper,top=1.2in,bottom=1.2in,left=1.5in,right=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{lscape} 
+\usepackage{longtable}
+\usepackage{booktabs} 
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{afterpage}
+\usepackage{nameref}
+\usepackage[authordate, backend=biber, hyperref=true]{biblatex-chicago}
+\usepackage{csquotes}
+\usepackage{threeparttable} 
+\usepackage{multirow}
+\usepackage{tabularx} 
+\usepackage{makecell} 
+\usepackage{setspace}
+\usepackage{array}    
+\usepackage[official]{eurosym}
+\usepackage{changepage}
+\usepackage{epigraph}
+\usepackage{soul}
+
+\hypersetup{
+    colorlinks=true,    % Set to true to enable coloured links
+    linkcolor=blue,    % Colour of internal links
+    citecolor=blue,    % Colour of citations
+    filecolor=black,    % Colour of file links
+    urlcolor=blue,     % Colour of URLs
+    menucolor=black     % Colour of Acrobat menu links
+}
+
+
+
+
+\renewcommand\theadfont{\bfseries} % Bold table headers
+\renewcommand\theadalign{bc}       % Center-align header text vertically and horizontally
+\renewcommand\cellalign{lt}        % Align cell text to the left and top
+\renewcommand{\arraystretch}{1.2}  % Adjust cell padding to fit the page
+\setlength{\tabcolsep}{4pt}        % Reduce space between columns
+
+\linespread{1.5} % 
+
+\setlength{\epigraphwidth}{0.8\textwidth}
+
+% Footnote spacing
+\let\oldfootnote\footnote
+\renewcommand{\footnote}[1]{%
+  \begingroup
+  \setstretch{1}%
+  \oldfootnote{#1}%
+  \endgroup
+}
+
+\bibliography{references}
+

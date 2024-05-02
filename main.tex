@@ -1,0 +1,40 @@
+\documentclass[a4paper,11pt]{article}
+
+ % Add this to use \url{}
+\input{preamble.tex}
+
+% The bibliography command should be placed after \begin{document}
+\title{Dell (2010), The Persistent Effects of Peru's Mining \emph{Mita}: Replication and Extension to Test Spatial Auto-Correlation}
+\author{Joshua Bailey
+\and \small \url{https://github.com/joshua-bailey/plsc536_finalproject.git}}
+
+\begin{document} % This should come before \maketitle
+
+% Include the title page here
+\input{titlepage.tex} 
+\newpage 
+
+\maketitle
+
+
+% Make sure the file '1-introduction.tex' exists in the 'Sections' directory or provide the correct path
+
+\input{sections/1-introduction}
+\input{sections/2-literature}
+\input{sections/3-methods}
+\input{sections/4-analysis}
+\input{sections/5-conclusion}
+
+\pagebreak
+
+\nocite{*}
+\printbibliography 
+
+\pagebreak
+
+\input{sections/appendix}
+
+
+
+
+\end{document}
