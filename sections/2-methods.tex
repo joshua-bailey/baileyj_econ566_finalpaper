@@ -1,0 +1,99 @@
+\pagebreak
+\section{Methods and Data: Forecasting Inflation with Machine Learning Models} \label{sec:methods}
+
+The goal of this paper is to compare methods for forecasting US inflation. Specifically, I employ a series of models to forecast inflation one month ahead, specifically, the month-over-month log change in US CPI. 
+
+\textbf{WHICH MODELS}
+
+The general approach is to evaluate the model using an expanding window approach, i.e., in each month, the model will be trained on data available up to that month, which will in turn generate a forecast for the next month's inflation. 
+
+
+
+\subsection{Models}
+
+\subsubsection{Univariate autoregressive model}
+
+The baseline model in this paper is a standard univariate autoregressive (AR) model. 
+
+
+\subsubsection{Random Forest}
+
+
+Conceptually, a random forest comprises an ensemble of decision trees. Each decision tree in the ensemble serves to approximate the relationship between the target variable and the explanatory variables by partitioning the feature space into distinct subsets and producing a constant prediction for each subset. Specifically, in the context of regression—the focus of this discussion—the prediction within each subset is calculated as the mean of the target values encompassed by that subset. Conceptually, a decision tree may be characterised as a nonparametric regression model wherein the regression function linking the target to the features is estimated via a piecewise constant approach.
+
+The segmentation of the feature space is executed recursively during the tree development phase. Initially, the tree is comprised of a single node—the root node—which encompasses the entire dataset. Within this node, the target prediction is made by averaging all observations of the target within the dataset. Subsequently, the dataset is recursively divided into increasingly smaller subsets, known as nodes. Each new node (child) originates from a subset of an existing node (parent), and the target prediction at each node is made by averaging the observations of the target within that node.
+
+The divisions generating these nodes are driven by an optimisation process aimed at minimising a specific loss function, subject to constraints such as each node containing a minimum sample size. A commonly utilised loss function is the mean squared error of the prediction at each node, which equates to the variance of the target values within the node. This metric promotes the creation of nodes with homogeneous target values.
+
+As the tree develops, progressively finer partitions of the feature space are established, enhancing the accuracy of the predictions. This refinement persists until a predetermined criterion is satisfied, such as each terminal node (leaf) comprising a minimum number of observations or the tree achieving a predetermined depth, measured by the number of nodes or recursive divisions from the root to the leaves.
+
+Decision trees, however, are susceptible to overfitting. A sufficiently detailed tree could isolate individual target values within single leaves, thereby matching the training data's target values perfectly but failing to generalise effectively to novel, unseen data. Furthermore, decision trees demonstrate limited robustness to variations in input data, as minor modifications to the training data can lead to significantly different tree structures.
+
+To mitigate these shortcomings, random forests employ multiple decision trees, each trained on distinct random subsets of the training data (a technique known as sample bagging) and utilising varied random subsets of features (feature bagging). The final predictions of a random forest are derived by averaging the predictions from each tree within the ensemble. This approach of sample and feature bagging diminishes the correlation among the trees' predictions, thereby enhancing the robustness of the ensemble and reducing its susceptibility to overfitting.
+
+In the context of macroeconomic forecasting, random forests are particularly valuable for several reasons. Random forests provide an intrinsic mechanism to evaluate the importance of various predictors in forecasting economic conditions. This feature is crucial in selecting key economic indicators that most significantly impact the macroeconomic variables being forecasted. The out-of-bag error estimation also offers an efficient method for validating the model’s performance without the need for a separate validation dataset. This is especially useful in economics where the availability of data can be limited, and traditional cross-validation might lead to overfitting. Furthermore, given the complexity and noise inherent in economic data, random forests’ robustness to overfitting and ability to handle large feature spaces make them ideal for capturing complex nonlinear relationships that are typical in macroeconomic interactions.
+
+
+
+\begin{figure}[h] 
+\vspace{5mm}
+\centering 
+\begin{forest}
+  for tree={l sep=1.5em, s sep=1.5em, anchor=center, inner sep=0.3em, fill=blue!50, circle, where level=2{no edge}{}}
+  [
+  Training Data, node box
+  [Sample and feature bagging, node box, alias=bagging, above=3em
+  [,red!70,alias=a1[[,alias=a2][]][,red!70,edge label={node[above=0.5ex,red arrow]{}}[[][]][,red!70,edge label={node[above=0.5ex,red arrow]{}}[,red!70,edge label={node[below=0.5ex,red arrow]{}}][,alias=a3]]]]
+  [,red!70,alias=b1[,red!70,edge label={node[below=0.5ex,red arrow]{}}[[,alias=b2][]][,red!70,edge label={node[above=0.5ex,red arrow]{}}]][[][[][,alias=b3]]]]
+  [~~$\dots$~,scale=1.5,no edge,fill=none,yshift=-2em]
+  [,red!70,alias=c1[[,alias=c2][]][,red!70,edge label={node[above=0.5ex,red arrow]{}}[,red!70,edge label={node[above=0.5ex,red arrow]{}}[,alias=c3][,red!70,edge label={node[above=0.5ex,red arrow]{}}]][,alias=c4]]]]
+  ]
+  \node[tree box, fit=(a1)(a2)(a3)](t1){};
+  \node[tree box, fit=(b1)(b2)(b3)](t2){};
+  \node[tree box, fit=(c1)(c2)(c3)(c4)](tn){};
+  \node[below right=0.5em, inner sep=0pt] at (t1.north west) {Tree 1};
+  \node[below right=0.5em, inner sep=0pt] at (t2.north west) {Tree 2};
+  \node[below right=0.5em, inner sep=0pt] at (tn.north west) {Tree $n$};
+  \path (t1.south west)--(tn.south east) node[midway,below=3em, node box] (mean) {Mean in regression or majority vote in classification};
+  \node[below=2em of mean, node box] (pred) {Prediction};
+  \draw[black arrow={4mm}{3mm}] (bagging) -- (t1.north);
+  \draw[black arrow] (bagging) -- (t2.north);
+  \draw[black arrow={4mm}{3mm}] (bagging) -- (tn.north);
+  \draw[black arrow={4mm}{4mm}] (t1.south) -- (mean);
+  \draw[black arrow] (t2.south) -- (mean);
+  \draw[black arrow={4mm}{4mm}] (tn.south) -- (mean);
+  \draw[black arrow] (mean) -- (pred);
+\end{forest}
+\caption{A visual representation of a random forest model showing sample and feature bagging, decision trees, and the averaging process.\footnotemark}
+\end{figure}
+
+\footnotetext{This diagram is based on conceptual material from "Random Forests and Decision Trees from Scratch in Python" by Towards Data Science, available at \url{https://towardsdatascience.com/random-forests-and-decision-trees-from-scratch-in-python-3e4fa5ae4249}. Adaptations and modifications were made to the TikZ code originally found on TeX StackExchange at \url{https://tex.stackexchange.com/questions/503883/illustrating-the-random-forest-algorithm-in-tikz}.}
+
+
+
+
+This paper follows the random forest method set out in \textcite{Medeiros2021ForecastingMethods}
+
+
+
+\subsection{Data: FRED-MD}
+
+FRED-MD is a large macroeconomic database designed for the empirical analysis of “big data” \autocite{McCracken2016FRED-MD:Research}. The dataset has become a popular resource for modelling US macro variables, due to the number of variables, the length of the time series and the regularity of updates.
+
+The dataset is of monthly observations, updated on a monthly basis. Each monthly release is referred to as a vintage. A different CSV file is released for each month. The data is publicly accessible.\footnote{The latest vintage, as of the time of publication, is available at: \url{https://files.stlouisfed.org/files/htdocs/fred-md/monthly/2024-04.csv}. The historical vintages can be accessed directly at \url{https://s3.amazonaws.com/files.research.stlouisfed.org/fred-md/Historical_FRED-MD.zip}
+} The sample spans from March, 1959 to the present, providing us with a relatively rich data set of macroeconomic time series with $x = 134$ variables and $t = 780$ observations. These variables are grouped under eight headings of macroeconomic indicators: output and income, labour market, consumption and orders, orders and inventory, money and credit, interest rates and exchange rates, prices, and stock market.
+
+As the focus of this paper in inflation forecasting, the dependent variable of interest throughout the analysis is \texttt{CPIAUCSL}. I use the data from January 2015 to January 2024 for the analysis throughout the paper.
+
+A full list of the variables available in FRED-MD is included in the Appendix, at \S \ref{sec:appendix_var}. The data is not stationary by default but the first row of the CSV file contains the relevant transformations needed to prepare the data. The codes are as follows:
+
+\begin{enumerate}
+    \item no transformation,
+    \item first order difference,
+    \item second order difference,
+    \item logarithm,
+    \item first order logarithmic difference,
+    \item second order logarithmic difference, and
+    \item percentage change.
+\end{enumerate}
+

@@ -23,6 +23,23 @@
 \usepackage{changepage}
 \usepackage{epigraph}
 \usepackage{soul}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{forest}
+\usetikzlibrary{fit,positioning}
+\setlist[enumerate]{itemsep=0mm}
+
+\tikzset{
+  font=\small\sffamily\bfseries, % Reduced font size
+  red arrow/.style={
+    midway,red,sloped,fill, minimum height=2cm, single arrow, single arrow head extend=.5cm, single arrow head indent=.25cm,xscale=0.2,yscale=0.1, % Smaller arrows
+    allow upside down
+  },
+  black arrow/.style 2 args={-stealth, shorten >=#1, shorten <=#2},
+  black arrow/.default={1mm}{1mm},
+  tree box/.style={draw, rounded corners, inner sep=0.5em}, % Smaller inner separation
+  node box/.style={white, draw=black, text=black, rectangle, rounded corners},
+}
 
 \hypersetup{
     colorlinks=true,    % Set to true to enable coloured links
