@@ -1,7 +1,7 @@
 
 \begin{titlepage}
 
-\title{Forecasting US Inflation: An Application of Machine Learning Methods\footnote{Econ 566 - Final project}} 
+\title{Forecasting US Inflation in the Post-Global Financial Crisis Era: An Application of Machine Learning Methods\footnote{Econ 566 - Final project}} 
 \author{Joshua Bailey\thanks{Yale University, \texttt{\ e-mail:  \href{mailto: joshua.bailey@yale.edu}{joshua.bailey@yale.edu}}
 }
 \\ 
@@ -9,14 +9,16 @@
 }
 
 
-\date{\textcolor{red}{Working draft}: \today}
+\date{May 6, 2024}
 \maketitle
 \vspace{-20pt}
 \begin{abstract}
 \begin{adjustwidth}{-10pt}{-10pt}
 \thispagestyle{empty}
 
-\noindent over the considered time period, the random forest model outperforms the AR model under different measures of forecast error.. 
+\noindent Inflation forecasting has long been a central task of empirical macroeconomics. The complexity of the macroeconomy, limits on data and computational power have also made it a consistently challenging one. Recent advances in the quality of macroeconomic data and the increasing popularity of machine learning techniques are helping to make this challenge more tractable. I employ two such techniques -- the Random Forest (RF) and regularised Lasso regression -- to forecast inflation over two periods, the post-GFC period, 2015-2020, and the 2020-2022 inflation shock period. Comparing their performance to the workhorse univariate autoregressive (AR) model, I find that both methods perform better in forecasting inflation in the post-GFC period. Since the start of Covid, the AR model retains its advantage and performs slightly better than the RF. While performing relatively less well in post-Covid forecasting, the Lasso also offers valuable insights into the features that drive inflation, with the model conforming to the theoretical findings that monetary policy and labour markets substantially determine inflation outcomes.  
+
+\textbf{Acknowledgements:} My thanks to Jonas Lieber for a great semester. I've learnt a lot. The best of luck in London next year. 
 
 \end{adjustwidth}
 \end{abstract}
@@ -29,11 +31,13 @@
 \pagebreak
 
 % Temporarily change link color for the table of contents
+\begin{singlespace}
 \hypersetup{linkcolor=black}
 \tableofcontents
 \listoffigures
 \listoftables
 \hypersetup{linkcolor=blue}
+\end{singlespace}
 
 
  

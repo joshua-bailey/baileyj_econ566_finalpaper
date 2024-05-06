@@ -2,18 +2,27 @@
 \begin{landscape}
 \section{Appendix} \label{sec:appendix}
 
-\subsection{Appendix - Full FredMD variable list} \label{sec:appendix_var}
 
-\small
 \begin{singlespace} 
-\begin{center}
-   \textbf{Group 1: Output and Income}
-\end{center}
+\small
 
 
-\begin{longtable}{rlrllll} 
-\hline & id & tcode & fred & description & gsi & gsi:description \\
-\hline 1 & 1 & 5 & RPI & Real Personal Income & M_14386177 & PI \\
+\begin{longtable}{rlrllll}
+\caption{Appendix: Full FredMD variable list} \label{tab:appendix_var} \\
+\endfirsthead % Ensures the header is repeated on each page if the table spans multiple pages
+
+\multicolumn{7}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\endhead % Header to be printed at the top of every subsequent page
+
+\multicolumn{7}{r}{\textit{Continued on next page}} \\ \endfoot
+\hline
+\endlastfoot
+
+\multicolumn{7}{c}{\textbf{Group 1: Output and Income}} \\ % Centered group title
+\hline & id & tcode & fred & description & gsi & gsi:description \\ % Column headers
+\hline 
+1 & 1 & 5 & RPI & Real Personal Income & M_14386177 & PI \\
 2 & 2 & 5 & W875RX1 & Real personal income ex transfer receipts & M_145256755 & PI less transfers \\
 3 & 6 & 5 & INDPRO & IP Index & M_116460980 & IP: total \\
 4 & 7 & 5 & IPFPNSS & IP: Final Products and Nonindustrial Supplies & M_116460981 & IP: products \\
@@ -33,6 +42,7 @@
 \hline
 \end{longtable}
 
+\pagebreak
 
 \begin{center}
    \textbf{Group 2: Labor Market}
@@ -96,6 +106,7 @@
 \hline
 \end{longtable}
 
+\pagebreak
 \begin{center}
    \textbf{Group 4: Orders and Inventories}
 \end{center}
@@ -230,3 +241,19 @@
 
 \end{landscape}
 
+
+\setcounter{table}{7} % Set the table counter to 1 less than the actual number of tables
+
+\begin{table}[H]
+\centering
+\caption{Appendix: Lasso vs Reduced Polynomial Lasso -- Errors Comparison} \label{tab:appendixlasso}
+\begin{tabular}{lccc}
+\toprule
+& Lasso & Reduced Poly Lasso \\
+\midrule
+RMSE & 0.005705 & 0.003450 \\
+MAE  & 0.003826 & 0.002557 \\
+MAD  & 0.002642 & 0.002182 \\
+\bottomrule
+\end{tabular}
+\end{table}

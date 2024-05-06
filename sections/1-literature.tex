@@ -36,22 +36,10 @@ The increasing focus on random forests informs the focus of this paper \autocite
 
 \subsection{Paper Overview}
 
-The goal of this paper is to compare methods for forecasting US inflation. Specifically, I employ a series of models to forecast inflation one month ahead, specifically, the month-over-month log change in US CPI. 
+The selection of the models in this paper reflects the realities faced by macroeconomic forecasters. If an omniscient planner had access to both perfect data and boundless computational prowess, the approach to forecasting inflation would transcend traditional methodologies. Such a planner would have access to non-traditional data like real-time biometric economic indicators from individuals reflecting their spending propensity and stress levels linked to financial stability, detailed satellite imagery tracking raw material movements globally, and predictive logistics data foreseeing supply chain disruptions before they occur. Futuristic data like genetic algorithms predicting entrepreneurial success and the economic impact of unpatented innovations could also feed into this vast informational nexus.
 
+Leveraging infinite computational power, the planner would integrate these vast datasets into a hybrid model combining traditional econometric methods with cutting-edge machine learning techniques. Structural economic models would be used to ensure the incorporation of well-established economic theories, while deep learning networks would manage the sheer scale and complexity of the data, capturing subtle nonlinearities and interactions that traditional models might miss. This model would not only continuously update in real-time as new data becomes available, but also simulate countless economic scenarios to predict the impacts of potential economic shocks or policy interventions. This ultimate model would serve as more than a forecasting tool; it would be an economic oracle, capable of advising policymakers on the optimal interventions to avoid inflationary pressures or deflationary spirals before they materialize. 
 
-\textbf{WHAT AM I ACTUALLY DOING IN THE PAPER}
+In the absence of such a system, forecasting needs to make use of macroeconomic data as it exists today. That is to say, data that is often untimely and subject to substantial revision. While there are increasingly novel datasets, like satellite imagery, most macroeconomists, especially those with significantly policymaking responsibility, have not seen fit to integrate them into their forecasting systems as yet. There are, however, as this paper will now explore, an increasingly powerful array of machine learning tools (and improving time series macro data) that are finally allowing us to improve the accuracy of macroeconomic forecasting.
 
-Emi's paper compares neural network to a univariate autoregressive model
-
-Start with the univariate autoregressive model.
-
-Then do lasso, ridge, NN and RF?
-
-Having situated this paper in the literature on inflation forecasting the section above, \S \ref{sec:lit_review}, I now move to the substantive section of the paper. In \S \ref{sec:methods_models} I formally introduce the models estimated in the paper \textbf{ADD HERE}. I then discuss the data used in the paper, the FRED-MD macroeconomic dataset, in \S \ref{sec:methods_data}. In \S \ref{sec:analysis} I then present and analyse the results from the models. I conclude in \S \ref{sec:conc} by saying \textbf{ADD HERE}
-
-
-\subsubsection{stuff i need to do b/c jonas says}
-
-What I am doing given compute 
-
-What I would do with more compute
+Having situated the paper in the literature on inflation forecasting in the section above, \S \ref{sec:lit_review}, I now move to the substantive section of the paper. The goal of this paper is to compare methods for forecasting US inflation. Specifically, I employ a series of models to forecast inflation one month ahead, specifically, the month-over-month log change in US CPI. In \S \ref{sec:methods_models} I formally introduce the models estimated in the paper, an autoregressive (AR) model, a Random Forest (RF) and Least Absolute Shrinkage and Selection Operator (Lasso) model. I then discuss the data used in the paper, the FRED-MD macroeconomic dataset, in \S \ref{sec:methods_data}. In \S \ref{sec:analysis}, I then present and analyse the results from the models. 
